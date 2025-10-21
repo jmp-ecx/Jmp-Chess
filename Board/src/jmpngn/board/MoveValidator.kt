@@ -1,6 +1,7 @@
 package jmpngn.board
 
 import kotlin.math.abs
+import kotlin.math.floor
 
 object MoveValidator {
 
@@ -31,6 +32,45 @@ object MoveValidator {
     }
 
     fun ValidateRookMove(board: Board, move: Move): Boolean {
+        val start_rank  = floor(move.GetStart() / 8.0).toInt() * 8
+        val target_rank = floor(move.GetTarget() / 8.0).toInt() * 8
+
+        val vertical_movement = move.GetTarget() % 8 == move.GetStart() % 8
+        val horizontal_movement = start_rank == target_rank
+
+        if (!vertical_movement && !horizontal_movement) return false
+
+        if (vertical_movement) {
+            if (move.GetStart() > move.GetTarget()) {
+                var i = move.GetStart()
+                while (i > move.GetTarget()) {
+                    i -= 8
+                    println("$i :: ${board.GetSquare(i)}")
+                    if (board.GetSquare(i) != null) return false // TODO - captures
+                }
+            } else {
+                var i = move.GetStart()
+                while (i < move.GetTarget()) {
+                    i += 8
+                    if (board.GetSquare(i) != null) return false // TODO - captures
+                }
+            }
+        } else {
+            if (move.GetStart() > move.GetTarget()) {
+                var i = move.GetStart()
+                while (i > move.GetTarget()) {
+                    i -= 1
+                    if (board.GetSquare(i) != null) return false // TODO - captures
+                }
+            } else {
+                var i = move.GetStart()
+                while (i < move.GetTarget()) {
+                    i += 1
+                    if (board.GetSquare(i) != null) return false // TODO - captures
+                }
+            }
+        }
+
         return true
     }
 

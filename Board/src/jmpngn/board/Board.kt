@@ -175,6 +175,7 @@ class Board {
                     State[t_col_offset + t_type_offset] = State[t_col_offset + t_type_offset].ZeroBit(endIdx)
             }
             PieceType.Rook -> {
+                if (!MoveValidator.ValidateRookMove(this, move)) return false
                 State[p_col_offset + RookOffset] = State[p_col_offset + RookOffset].ZeroBit(startIdx)
                 State[p_col_offset + RookOffset] = State[p_col_offset + RookOffset].SetBit(endIdx)
 
