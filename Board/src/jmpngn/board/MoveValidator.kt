@@ -45,7 +45,6 @@ object MoveValidator {
                 var i = move.GetStart()
                 while (i > move.GetTarget()) {
                     i -= 8
-                    println("$i :: ${board.GetSquare(i)}")
                     if (board.GetSquare(i) != null) return false // TODO - captures
                 }
             } else {
