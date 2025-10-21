@@ -80,15 +80,15 @@ fun main() {
                 val board_x = 7-square_x
                 val board_y = 7-square_y
 
-                if (selected != null && selected?.second == Pair(board_x, board_y)
-                 && selected?.first != null
-                 && selected?.first?.type != PieceType.None) {
-                    g.color = Color(220, 72, 88)
+                g.color = if (selected != null && selected?.second == Pair(board_x, board_y)
+                           && selected?.first != null
+                           && selected?.first?.type != PieceType.None) {
+                    Color(220, 72, 88)
                 } else if (AppState.DisplayedBitboard != PieceType.None
                         && board.IsPiece(board_x, board_y, AppState.DisplayedBitboard)) {
-                    g.color = Color(72, 88, 220)
-                }  else {
-                    g.color = Color(
+                    Color(72, 88, 220)
+                } else {
+                    Color(
                         if (light) 243 else 183,
                         if (light) 226 else 125,
                         if (light) 207 else 107
