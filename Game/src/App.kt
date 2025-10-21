@@ -49,6 +49,9 @@ fun main() {
         Button(WINDOW_SIZE+10, 260, SQUARE_SIZE-20, 40, Color(255, 0, 255)) {
             AppState.DisplayedBitboard = PieceType.King
         },
+        Button(WINDOW_SIZE+10, WINDOW_SIZE-50, SQUARE_SIZE-20, 40, Color(50, 50, 120)) {
+            board.UndoMove()
+        },
     )
 
     var selected: Pair<Piece?, Pair<Int, Int>>? = null

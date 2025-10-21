@@ -2,14 +2,14 @@ package jmpngn.board
 
 const val BoardSize = 8
 
-enum class PieceType(val char: String) {
-    None(" "),
-    Pawn("P"),
-    Bishop("B"),
-    Knight("N"),
-    Rook("R"),
-    Queen("Q"),
-    King("K"),
+enum class PieceType() {
+    None,
+    Pawn,
+    Bishop,
+    Knight,
+    Rook,
+    Queen,
+    King,
 }
 
 data class Piece(val type: PieceType, val white: Boolean)
@@ -27,7 +27,7 @@ class Board {
         private const val KingOffset   = 5
     }
 
-    private var State = mutableListOf( // TODO - FEN Notation loading
+    private var State = mutableListOf(
         0b00000000_00000000_00000000_00000000_00000000_00000000_11111111_00000000u, // White Pawn
         0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_00100100u, // White Bishop
         0b00000000_00000000_00000000_00000000_00000000_00000000_00000000_01000010u, // White Knight
@@ -44,7 +44,6 @@ class Board {
     private var PrevState = State
 
     var WhiteToMove = true
-        private set
 
     fun LoadFEN(fen: String) {
         val data = fen.split(' ')
@@ -202,7 +201,11 @@ class Board {
         return true
     }
 
-    fun UndoMove() { State = PrevState.toMutableList() }
+    fun UndoMove() {
+        State = PrevState.toMutableList()
+        WhiteToMove = !WhiteToMove
+    }
+
     private fun FullBoard(): ULong  = State.reduce { acc, value -> acc or value }
     private fun WhiteBoard(): ULong = State.subList(0, 6).reduce { acc, value -> acc or value}
     private fun BlackBoard(): ULong = State.subList(6, 12).reduce { acc, value -> acc or value}
