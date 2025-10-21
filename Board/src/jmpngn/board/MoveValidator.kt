@@ -40,37 +40,51 @@ object MoveValidator {
 
         if (!vertical_movement && !horizontal_movement) return false
 
+        var is_legal = true
+        var i = move.GetStart()
         if (vertical_movement) {
             if (move.GetStart() > move.GetTarget()) {
-                var i = move.GetStart()
-                while (i > move.GetTarget()) {
+                while (i > move.GetTarget()+8) {
                     i -= 8
-                    if (board.GetSquare(i) != null) return false // TODO - captures
+                    if (board.GetSquare(i) != null) {
+                        is_legal = false
+                        break
+                    }
                 }
             } else {
-                var i = move.GetStart()
-                while (i < move.GetTarget()) {
+                while (i < move.GetTarget()-8) {
                     i += 8
-                    if (board.GetSquare(i) != null) return false // TODO - captures
+                    if (board.GetSquare(i) != null) {
+                        is_legal = false
+                        break
+                    }
                 }
             }
         } else {
             if (move.GetStart() > move.GetTarget()) {
-                var i = move.GetStart()
-                while (i > move.GetTarget()) {
+                while (i > move.GetTarget()+1) {
                     i -= 1
-                    if (board.GetSquare(i) != null) return false // TODO - captures
+                    if (board.GetSquare(i) != null) {
+                        is_legal = false
+                        break
+                    }
                 }
             } else {
-                var i = move.GetStart()
-                while (i < move.GetTarget()) {
+                while (i < move.GetTarget()-1) {
                     i += 1
-                    if (board.GetSquare(i) != null) return false // TODO - captures
+                    if (board.GetSquare(i) != null) {
+                        is_legal = false
+                        break
+                    }
                 }
             }
         }
 
-        return true
+        val p = board.GetSquare(move.GetTarget())
+        if (p != null && p.white == board.GetSquare(move.GetStart())!!.white)
+            is_legal = false
+
+        return is_legal
     }
 
     fun ValidateQueenMove(board: Board, move: Move): Boolean {
