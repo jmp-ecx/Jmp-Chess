@@ -32,22 +32,22 @@ fun main() {
 
     val ui_buttons = listOf(
         Button(WINDOW_SIZE+10, 10, SQUARE_SIZE-20, 40, Color(255, 0, 0)) {
-            AppState.SetDisplayedBitboard(PieceType.Pawn)
+            AppState.DisplayedBitboard = PieceType.Pawn
         },
         Button(WINDOW_SIZE+10, 60, SQUARE_SIZE-20, 40, Color(0, 255, 0)) {
-            AppState.SetDisplayedBitboard(PieceType.Bishop)
+            AppState.DisplayedBitboard = PieceType.Bishop
         },
         Button(WINDOW_SIZE+10, 110, SQUARE_SIZE-20, 40, Color(0, 0, 255)) {
-            AppState.SetDisplayedBitboard(PieceType.Knight)
+            AppState.DisplayedBitboard = PieceType.Knight
         },
         Button(WINDOW_SIZE+10, 160, SQUARE_SIZE-20, 40, Color(255, 255, 0)) {
-            AppState.SetDisplayedBitboard(PieceType.Rook)
+            AppState.DisplayedBitboard = PieceType.Rook
         },
         Button(WINDOW_SIZE+10, 210, SQUARE_SIZE-20, 40, Color(0, 255, 255)) {
-            AppState.SetDisplayedBitboard(PieceType.Queen)
+            AppState.DisplayedBitboard = PieceType.Queen
         },
         Button(WINDOW_SIZE+10, 260, SQUARE_SIZE-20, 40, Color(255, 0, 255)) {
-            AppState.SetDisplayedBitboard(PieceType.King)
+            AppState.DisplayedBitboard = PieceType.King
         },
     )
 
