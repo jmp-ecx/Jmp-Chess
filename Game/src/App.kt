@@ -9,6 +9,7 @@ import ui.Button
 import ui.PieceTexture
 import ui.Window
 import java.awt.Color
+import java.awt.Font
 import java.awt.Graphics
 import java.awt.event.MouseEvent
 import javax.swing.SwingUtilities
@@ -31,25 +32,25 @@ fun main() {
     SwingUtilities.invokeLater { win.isVisible = true }
 
     val ui_buttons = listOf(
-        Button(WINDOW_SIZE+10, 10, SQUARE_SIZE-20, 40, Color(255, 0, 0)) {
+        Button(WINDOW_SIZE+10, 10, SQUARE_SIZE-20, 40, Color(255, 0, 0), "P") {
             AppState.DisplayedBitboard = PieceType.Pawn
         },
-        Button(WINDOW_SIZE+10, 60, SQUARE_SIZE-20, 40, Color(0, 255, 0)) {
+        Button(WINDOW_SIZE+10, 60, SQUARE_SIZE-20, 40, Color(0, 255, 0), "B") {
             AppState.DisplayedBitboard = PieceType.Bishop
         },
-        Button(WINDOW_SIZE+10, 110, SQUARE_SIZE-20, 40, Color(0, 0, 255)) {
+        Button(WINDOW_SIZE+10, 110, SQUARE_SIZE-20, 40, Color(0, 0, 255), "N") {
             AppState.DisplayedBitboard = PieceType.Knight
         },
-        Button(WINDOW_SIZE+10, 160, SQUARE_SIZE-20, 40, Color(255, 255, 0)) {
+        Button(WINDOW_SIZE+10, 160, SQUARE_SIZE-20, 40, Color(255, 255, 0), "R") {
             AppState.DisplayedBitboard = PieceType.Rook
         },
-        Button(WINDOW_SIZE+10, 210, SQUARE_SIZE-20, 40, Color(0, 255, 255)) {
+        Button(WINDOW_SIZE+10, 210, SQUARE_SIZE-20, 40, Color(0, 255, 255), "Q") {
             AppState.DisplayedBitboard = PieceType.Queen
         },
-        Button(WINDOW_SIZE+10, 260, SQUARE_SIZE-20, 40, Color(255, 0, 255)) {
+        Button(WINDOW_SIZE+10, 260, SQUARE_SIZE-20, 40, Color(255, 0, 255), "K") {
             AppState.DisplayedBitboard = PieceType.King
         },
-        Button(WINDOW_SIZE+10, WINDOW_SIZE-50, SQUARE_SIZE-20, 40, Color(50, 50, 120)) {
+        Button(WINDOW_SIZE+10, WINDOW_SIZE-50, SQUARE_SIZE-20, 40, Color(50, 50, 120), "Undo") {
             board.UndoMove()
         },
     )
@@ -76,6 +77,8 @@ fun main() {
     }
 
     win.AddDrawer { g: Graphics ->
+        g.font = Font("Consolas", Font.PLAIN, 25)
+
         for (square_y in 7 downTo 0) {
             for (square_x in 7 downTo 0) {
                 val light = (square_x+square_y) % 2 == 0
